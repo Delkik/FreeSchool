@@ -3,18 +3,48 @@ import { House } from "lucide-react";
 import Link from "next/link";
 import { ArrowRightFromLine } from "lucide-react";
 import { ArrowLeftFromLine } from "lucide-react";
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { Search } from "lucide-react";
 import { MessageCircle } from "lucide-react";
-import Avatar from "./Avatar";
+import Avatar from "./common/Avatar";
+import clsx from "clsx";
 
-const ICON_SIZE = 48;
+const ICON_SIZE = 54;
+
+interface IconMapper {
+  item: string;
+  href: string;
+  icon: JSX.Element;
+}
+
+const iconMapper: IconMapper[] = [
+  {
+    item: "Home",
+    href: "",
+    icon: <House size={ICON_SIZE} />,
+  },
+  {
+    item: "Search",
+    href: "",
+    icon: <Search size={ICON_SIZE} />,
+  },
+  {
+    item: "Message",
+    href: "",
+    icon: <MessageCircle size={ICON_SIZE} />,
+  },
+  {
+    item: "Profile",
+    href: "",
+    icon: <Avatar width={ICON_SIZE} height={ICON_SIZE} />,
+  },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const openIcon = (
-    <button>
+    <button className={styles.icon}>
       {isOpen ? (
         <ArrowLeftFromLine size={ICON_SIZE} onClick={() => setIsOpen(false)} />
       ) : (
@@ -27,18 +57,18 @@ export default function Navbar() {
     <div className={styles.container}>
       <div className={styles.icons_list}>
         {openIcon}
-        <Link href={""}>
-          <House size={ICON_SIZE} />
-        </Link>
-        <Link href={""}>
-          <Search size={ICON_SIZE} />
-        </Link>
-        <Link href={""}>
-          <MessageCircle size={ICON_SIZE} />
-        </Link>
-        <Link href={""}>
-          <Avatar width={ICON_SIZE} height={ICON_SIZE} />
-        </Link>
+        {iconMapper.map((icon, index) => {
+          const isLast = index == iconMapper.length - 1;
+          return (
+            <button
+              className={clsx(styles.icon, isLast ? styles.last_icon : "")}
+              key={`navbar-${index}`}
+            >
+              <Link href={icon.href}>{icon.icon}</Link>
+              <span className={styles.icon_text}>{isOpen && icon.item}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
