@@ -1,5 +1,5 @@
-import SignInButton from "@/components/SignInButton";
-import SignUpButton from "@/components/SignUpButton";
+import SignInButton from "@/components/main/SignInButton";
+import SignUpButton from "@/components/main/SignUpButton";
 
 export default function LandingPage() {
   return (

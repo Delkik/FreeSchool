@@ -1,6 +1,6 @@
 // import Image from "next/image";
 import { CircleUserRound } from "lucide-react";
-import styles from "@/modules/common/Avatar.module.css";
+import styles from "@/modules/components/common/Avatar.module.css";
 
 interface AvatarProps {
   width?: string | number;
