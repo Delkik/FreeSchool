@@ -5,7 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --nav-size: 125px;
+  --nav-size: 145px;
 }
 
 @media (prefers-color-scheme: dark) {
