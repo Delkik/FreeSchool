@@ -1,6 +1,6 @@
 .container {
   width: 60%;
-  height: 60%;
+  height: 45%;
   background-color: rgb(255, 255, 255);
   border-radius: 8px;
   display: flex;
@@ -35,11 +35,11 @@
   color: var(--subtext);
 }
 
-.sign_up {
+.sign_in {
   width: 100%;
 }
 
-.sign_in {
+.sign_up {
   display: flex;
   gap: 6px;
 }
