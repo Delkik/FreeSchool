@@ -6,7 +6,7 @@ import { ArrowLeftFromLine } from "lucide-react";
 import { JSX, useState } from "react";
 import { Search } from "lucide-react";
 import { MessageCircle } from "lucide-react";
-import Avatar from "../common/Avatar";
+import CustomAvatar from "../common/CustomAvatar";
 import clsx from "clsx";
 
 const ICON_SIZE = 54;
@@ -36,7 +36,7 @@ const iconMapper: IconMapper[] = [
   {
     item: "Profile",
     href: "",
-    icon: <Avatar width={ICON_SIZE} height={ICON_SIZE} />,
+    icon: <CustomAvatar width={ICON_SIZE} height={ICON_SIZE} />,
   },
 ];
 

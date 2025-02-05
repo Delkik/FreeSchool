@@ -8,6 +8,10 @@
   flex: 1;
   border-right: solid rgb(44, 44, 44) 0.5px;
   background-color: cadetblue;
+  background-image: url("/sign-up-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  /* bac */
 }
 
 .right_container {
