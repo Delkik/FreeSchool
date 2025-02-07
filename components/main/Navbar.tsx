@@ -1,4 +1,4 @@
-import styles from "@/modules/Navbar.module.css";
+import styles from "@/modules/components/main/Navbar.module.css";
 import { House } from "lucide-react";
 import Link from "next/link";
 import { ArrowRightFromLine } from "lucide-react";
@@ -6,7 +6,7 @@ import { ArrowLeftFromLine } from "lucide-react";
 import { JSX, useState } from "react";
 import { Search } from "lucide-react";
 import { MessageCircle } from "lucide-react";
-import Avatar from "./common/Avatar";
+import CustomAvatar from "../common/CustomAvatar";
 import clsx from "clsx";
 
 const ICON_SIZE = 54;
@@ -36,7 +36,7 @@ const iconMapper: IconMapper[] = [
   {
     item: "Profile",
     href: "",
-    icon: <Avatar width={ICON_SIZE} height={ICON_SIZE} />,
+    icon: <CustomAvatar width={ICON_SIZE} height={ICON_SIZE} />,
   },
 ];
 
