@@ -5,7 +5,8 @@ import Box from "@mui/material/Box";
 import styles from "@/modules/app/dashboard/Dashboard.module.css";
 import Grid from "@mui/material/Grid2";
 import CoursePreview from "@/components/dashboard/CoursePreview";
-// import Stack from "@mui/material/Stack";
+import Calendar from "react-calendar";
+import Stack from "@mui/material/Stack";
 
 export default function Dashboard() {
   const name = "Dan";
@@ -43,7 +44,7 @@ export default function Dashboard() {
             <>
               {courses.map((course, index) => {
                 return (
-                  <Grid size={4} key={`course-${index}`}>
+                  <Grid size={3} key={`course-${index}`}>
                     <CoursePreview
                       image="/test-avatar.jpg"
                       courseDesc={course.courseDesc}
@@ -59,7 +60,10 @@ export default function Dashboard() {
 
         {/* Right */}
         <div className={styles.side_section}>
-          <span className={styles.notification_header}>Notifications</span>
+          <Stack>
+            <span className={styles.notification_header}>Notifications</span>
+            <Calendar className={styles.home_calendar} />
+          </Stack>
         </div>
       </div>
     </Box>
