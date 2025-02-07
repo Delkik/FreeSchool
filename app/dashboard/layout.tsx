@@ -8,9 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-screen">
+    <div className="">
       <Navbar />
-      <div className="flex-1 ml-[var(--nav-size)] p-6">{children}</div>
+      <div className="ml-[var(--nav-size)] pl-6">{children}</div>
     </div>
   );
 }
