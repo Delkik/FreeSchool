@@ -1,8 +1,17 @@
+"use client";
+
 import Box from "@mui/material/Box";
 import styles from "@/modules/app/dashboard/courses/preview/Preview.module.css";
 import Button from "@mui/material/Button";
+import { useRouter } from "next/navigation";
 
 export default function PreviewPage() {
+  const router = useRouter();
+
+  const onBorrowClick = () => {
+    router.push(`/dashboard/courses/${"123"}`);
+  };
+
   return (
     <Box>
       <Box className={styles.top_container}>
@@ -20,7 +29,11 @@ export default function PreviewPage() {
             >
               Enroll
             </Button>
-            <Button variant="contained" className={styles.enroll_button}>
+            <Button
+              variant="contained"
+              className={styles.enroll_button}
+              onClick={onBorrowClick}
+            >
               Borrow Class
             </Button>
           </Box>
