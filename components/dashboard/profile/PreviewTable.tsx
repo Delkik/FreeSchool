@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import styles from "@/modules/components/profile/PreviewTable.module.css";
+import styles from "@/modules/components/dashboard/profile/PreviewTable.module.css";
 
 interface PreviewTableProps {
   title: string;

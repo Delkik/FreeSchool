@@ -1,5 +1,5 @@
-import PreviewTable from "@/components/profile/PreviewTable";
-import ProfileBar from "@/components/profile/ProfileBar";
+import PreviewTable from "@/components/dashboard/profile/PreviewTable";
+import ProfileBar from "@/components/dashboard/profile/ProfileBar";
 import Box from "@mui/material/Box";
 
 export default function ProfilePage() {

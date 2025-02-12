@@ -1,4 +1,4 @@
-import styles from "@/modules/components/profile/ProfileBar.module.css";
+import styles from "@/modules/components/dashboard/profile/ProfileBar.module.css";
 import Box from "@mui/material/Box";
 import CustomAvatar from "@/components/common/CustomAvatar";
 
