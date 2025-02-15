@@ -1,10 +1,10 @@
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
-import styles from "@/modules/components/dashboard/CoursePreview.module.css";
+import styles from "@/modules/components/dashboard/CourseCard.module.css";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
 
-interface CoursePreviewProps {
+interface CourseCardProps {
   image: string;
   courseTitle: string;
   courseDesc: string;
@@ -12,12 +12,12 @@ interface CoursePreviewProps {
   grade: number;
 }
 
-export default function CoursePreview({
+export default function CourseCard({
   image,
   courseDesc,
   courseTitle,
   alt = "Course Image",
-}: CoursePreviewProps) {
+}: CourseCardProps) {
   const onCardClick = () => {
     console.log(`I've been clicked! ${courseTitle}`);
   };

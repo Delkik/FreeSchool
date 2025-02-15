@@ -4,7 +4,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import styles from "@/modules/app/dashboard/Dashboard.module.css";
 import Grid from "@mui/material/Grid2";
-import CoursePreview from "@/components/dashboard/CoursePreview";
+import CourseCard from "@/components/dashboard/CourseCard";
 import Calendar from "react-calendar";
 import Stack from "@mui/material/Stack";
 
@@ -45,8 +45,8 @@ export default function Dashboard() {
               {courses.map((course, index) => {
                 return (
                   <Grid size={3} key={`course-${index}`}>
-                    <CoursePreview
-                      image="/test-avatar.jpg"
+                    <CourseCard
+                      image="/static/test-avatar.jpg"
                       courseDesc={course.courseDesc}
                       courseTitle={course.courseTitle}
                       grade={100}

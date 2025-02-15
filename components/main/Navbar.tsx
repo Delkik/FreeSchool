@@ -25,17 +25,17 @@ const iconMapper: IconMapper[] = [
   },
   {
     item: "Search",
-    href: "",
+    href: "search",
     icon: <Search size={ICON_SIZE} />,
   },
   {
     item: "Message",
-    href: "",
+    href: "messaging",
     icon: <MessageCircle size={ICON_SIZE} />,
   },
   {
     item: "Profile",
-    href: "",
+    href: "profile",
     icon: <CustomAvatar width={ICON_SIZE} height={ICON_SIZE} />,
   },
 ];
@@ -64,7 +64,7 @@ export default function Navbar() {
               className={clsx(styles.icon, isLast ? styles.last_icon : "")}
               key={`navbar-${index}`}
             >
-              <Link href={icon.href}>{icon.icon}</Link>
+              <Link href={`/dashboard/${icon.href}`}>{icon.icon}</Link>
               <span className={styles.icon_text}>{isOpen && icon.item}</span>
             </button>
           );
