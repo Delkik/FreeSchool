@@ -1,0 +1,23 @@
+.page_container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+.right_container {
+  flex: 1;
+  border-left: solid rgb(44, 44, 44) 0.5px;
+  /* TODO: change image */
+  background-image: url("/sign-in-bg.png");
+  background-size: cover;
+  background-position: center;
+  /* bac */
+}
+
+.left_container {
+  flex: 1;
+  border-right: solid rgb(44, 44, 44) 0.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,17 @@
+.container {
+  width: 600px;
+  background-color: white;
+  height: 600px;
+  border-radius: 25px;
+  position: relative;
+  padding: 38px;
+  padding-top: 24px;
+  box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.25);
+}
+
+.table_title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  border-bottom: solid 1px black;
+  padding-bottom: 10px;
+}

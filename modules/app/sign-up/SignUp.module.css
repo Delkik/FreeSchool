@@ -1,0 +1,23 @@
+.page_container {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+.left_container {
+  flex: 1;
+  border-right: solid rgb(44, 44, 44) 0.5px;
+  background-color: cadetblue;
+  background-image: url("/sign-up-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  /* bac */
+}
+
+.right_container {
+  flex: 1;
+  border-left: solid rgb(44, 44, 44) 0.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

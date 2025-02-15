@@ -3,21 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #fff8ee;
   --foreground: #171717;
-  --nav-size: 125px;
+  --nav-size: 100px;
+  --link-text: #131ddf;
+  --subtext: #6d6d6d;
 }
 
-@media (prefers-color-scheme: dark) {
+/* TODO: add a dark mode (low low low priority) */
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --nav-size: 125px;
+    --background: #fff8ee;
+    --foreground: #171717;
+    --nav-size: 100px;
   }
-}
+} */
 
 body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.link_text {
+  color: var(--link-text);
 }

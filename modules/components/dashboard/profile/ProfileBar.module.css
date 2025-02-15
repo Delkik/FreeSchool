@@ -1,0 +1,36 @@
+.container {
+  background-color: #003366;
+  width: 100%;
+  border-radius: 12px;
+  height: 220px;
+  display: flex;
+  padding-left: 50px;
+  padding-right: 50px;
+  align-items: center;
+}
+
+.titles {
+  display: block;
+}
+
+.user_name {
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+.user_title {
+  color: white;
+  font-size: 24px;
+  font-weight: light;
+  margin: 0;
+  padding: 0;
+}
+
+.user_icon {
+  width: fit-content;
+  margin-left: auto;
+}
