@@ -1,5 +1,3 @@
-"use client";
-
 import styles from "@/modules/components/sign-in/SignInContainer.module.css";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -25,7 +23,7 @@ export default function SignInContainer() {
     },
   });
 
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
     try {
@@ -56,13 +54,15 @@ export default function SignInContainer() {
           <Controller
             name="email"
             control={control}
-            render={({ field }) => <TextField {...field} label="Email" />}
+            render={({ field }) => (
+              <TextField required {...field} label="Email" />
+            )}
           />
           <Controller
             name="password"
             control={control}
             render={({ field }) => (
-              <TextField {...field} label="Password" type="password" />
+              <TextField required {...field} label="Password" type="password" />
             )}
           />
         </Box>
@@ -71,7 +71,6 @@ export default function SignInContainer() {
           variant="contained"
           size="large"
           className={styles.sign_in}
-          // onClick={onSignIn}
         >
           Sign In
         </Button>

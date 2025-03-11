@@ -52,6 +52,6 @@
 }
 
 .error_text {
-  color: rgb(246, 51, 51);
+  color: var(--error-text);
   line-height: 1;
 }

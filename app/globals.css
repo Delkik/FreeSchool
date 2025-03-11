@@ -8,6 +8,7 @@
   --nav-size: 100px;
   --link-text: #131ddf;
   --subtext: #6d6d6d;
+  --error-text: rgb(246, 51, 51);
 }
 
 /* TODO: add a dark mode (low low low priority) */
