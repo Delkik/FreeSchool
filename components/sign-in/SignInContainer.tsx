@@ -5,8 +5,8 @@ import Button from "@mui/material/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import axios from "axios";
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 interface SignInForm {
   email: string;
@@ -26,16 +26,24 @@ export default function SignInContainer() {
   const [error, setError] = useState("");
 
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
+    const { email, password } = data;
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`;
+      // calls the next auth login which uses our backend
+      const res = await signIn("credentials", {
+        redirect: false, // Handle redirection manually
+        email,
+        password,
+      });
 
-      await axios.post(url, data);
-
+      if (!res?.ok) {
+        setError(res?.error || "");
+        return;
+      }
       router.push("/dashboard");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.error(e);
-      setError(e.response.data.error);
+      setError(e.error);
     }
   };
 

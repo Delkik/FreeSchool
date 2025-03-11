@@ -32,8 +32,6 @@ export default function SignUpContainer() {
   const onSubmit: SubmitHandler<SignUpForm> = async (data: SignUpForm) => {
     try {
       const splitName = data.name.split(" ");
-      // if (!)
-
       if (splitName.length < 2) {
         setError("Please include your First and Last name.");
         return;
