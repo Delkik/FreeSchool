@@ -6,7 +6,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 
 interface SignUpForm {
   name: string;
@@ -64,18 +63,10 @@ export default function SignUpContainer() {
       const json = await response.json();
       console.log(json);
 
-      // TODO: this should be changed from json.token to something else
-      if (json.token) {
-        // After successful signup, sign in using NextAuth
-        await signIn("credentials", {
-          redirect: false,
-          email,
-          password,
-          token: json.token,
-        });
+      if (json.Session) {
+        router.push(`/sign-up/confirm?email=${email}`);
       }
 
-      router.push("/dashboard");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.error(e);

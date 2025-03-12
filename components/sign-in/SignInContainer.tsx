@@ -37,9 +37,13 @@ export default function SignInContainer() {
       });
 
       if (!res?.ok) {
-        setError(res?.error || "");
+        setError(res?.error || "An error occurred. Please try again.");
         return;
       }
+
+      // TODO: this should include user and have a "isFirstTime" attribute, reroute based on that
+      // also should check if confirmed - could check based on error message, if not confirmed then send to 'sign-up/confirm'
+      // resend confirmation maybe?
       router.push("/dashboard");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
