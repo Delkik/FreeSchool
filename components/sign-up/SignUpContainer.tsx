@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useState } from "react";
-import axios from "axios";
+import { signIn } from "next-auth/react";
 
 interface SignUpForm {
   name: string;
@@ -30,27 +30,50 @@ export default function SignUpContainer() {
   const [error, setError] = useState("");
 
   const onSubmit: SubmitHandler<SignUpForm> = async (data: SignUpForm) => {
+    const { name, email, password, confirm } = data;
+
     try {
-      const splitName = data.name.split(" ");
+      const splitName = name.split(" ");
       if (splitName.length < 2) {
         setError("Please include your First and Last name.");
         return;
       }
-      if (data.password !== data.confirm) {
+      if (password !== confirm) {
         setError("Passwords must match!");
         return;
       }
       setError("");
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`;
 
       const resData = {
         firstName: splitName[0],
         lastName: splitName.slice(1).join(" "),
-        email: data.email,
-        password: data.password,
+        email,
+        password,
       };
 
-      await axios.post(url, resData);
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`;
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(resData),
+      });
+
+      const json = await response.json();
+      console.log(json);
+
+      // TODO: this should be changed from json.token to something else
+      if (json.token) {
+        // After successful signup, sign in using NextAuth
+        await signIn("credentials", {
+          redirect: false,
+          email,
+          password,
+          token: json.token,
+        });
+      }
 
       router.push("/dashboard");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

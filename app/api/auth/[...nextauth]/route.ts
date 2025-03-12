@@ -26,20 +26,23 @@ export const authOptions: AuthOptions = {
 
             console.log('user', user, user.error);
 
-            if (!res.ok || !user.token) {
+            if (!res.ok || !user.AuthenticationResult.AccessToken) {
                 // If login failed, return an error message
-                throw new Error(user.error);
+                throw new Error(user?.error || '');
             }
 
-            if (user?.accessToken) {
+            // TODO: probably want to refine the return result because AuthenticationResult is messy
+            if (user?.AuthenticationResult.AccessToken) {
             return {
-                ...user,
-                accessToken: user.accessToken,
-                refreshToken: user.refreshToken,
+                // TODO: once the backend includes the user data, ensure this includes the whole user
+                ...user, // this likely needs to be changed to user.user or something
+                accessToken: user.AuthenticationResult.AccessToken,
+                refreshToken: user.AuthenticationResult.RefreshToken,
             };
             }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (e: any) {
+            console.error(e);
             // Catch any errors and throw a more descriptive error
             throw new Error(e.message || "Authentication failed. Please try again.");
         }

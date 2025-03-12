@@ -28,6 +28,7 @@ export default function SignInContainer() {
   const onSubmit: SubmitHandler<SignInForm> = async (data) => {
     const { email, password } = data;
     try {
+      setError("");
       // calls the next auth login which uses our backend
       const res = await signIn("credentials", {
         redirect: false, // Handle redirection manually
