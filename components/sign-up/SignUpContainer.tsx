@@ -48,6 +48,7 @@ export default function SignUpContainer() {
         lastName: splitName.slice(1).join(" "),
         email,
         password,
+        role: "parent", // TODO: could be teacher, student, parent
       };
 
       const url = `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`;
@@ -65,12 +66,14 @@ export default function SignUpContainer() {
 
       if (json.Session) {
         router.push(`/sign-up/confirm?email=${email}`);
+      } else {
+        throw new Error(json.error);
       }
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       console.error(e);
-      setError(e.response.data.error);
+      setError(e?.response?.data?.error || e?.error || e?.message);
     }
   };
 

@@ -5,8 +5,6 @@ export function middleware(req: NextRequest) {
   // Check for the session using cookies or headers
   const session = req.cookies.get("next-auth.session-token.0");
 
-  console.log(req.cookies)
-
   // If there is no session, redirect to the login page
   if (!session) {
     return NextResponse.redirect(new URL("/", req.url));
@@ -18,5 +16,5 @@ export function middleware(req: NextRequest) {
 
 // Apply middleware to only certain paths or to all paths (like app/*)
 export const config = {
-  matcher: ['/dashboard','/dashboard/:path'], // Paths you want to protect
+  matcher: ["/dashboard", "/dashboard/:path"], // Paths you want to protect
 };

@@ -7,9 +7,16 @@ import Grid from "@mui/material/Grid2";
 import CourseCard from "@/components/dashboard/CourseCard";
 import Calendar from "react-calendar";
 import Stack from "@mui/material/Stack";
+import { useSession } from "next-auth/react";
 
 export default function Dashboard() {
-  const name = "Dan";
+  const { data: session } = useSession();
+
+  const name = session?.user?.firstName;
+
+  if (!name) {
+    return <div>Loading!</div>;
+  }
 
   const courses = [
     {
