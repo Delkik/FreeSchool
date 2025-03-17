@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "@/modules/components/main/Navbar.module.css";
 import { House } from "lucide-react";
 import Link from "next/link";
