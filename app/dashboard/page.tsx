@@ -14,10 +14,6 @@ export default function Dashboard() {
 
   const name = session?.user?.firstName;
 
-  if (!name) {
-    return <div>Loading!</div>;
-  }
-
   const courses = [
     {
       courseTitle: "Algebra 1",
