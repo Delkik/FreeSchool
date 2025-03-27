@@ -7,6 +7,8 @@ import Link from "next/link";
 import capitalizeString from "@/utils/capitalizeString";
 
 import styles from "@/modules/app/dashboard/profile/table/Table.module.css";
+import { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -39,6 +41,14 @@ export default function TablePage() {
   const searchParams = useSearchParams();
   const table = searchParams.get("table") || "documents";
 
+  const [isLoading, setIsLoading] = useState(false);
+  // const [dataColumns, setDataColumns] = useState();
+  // const [dataRows, setDataRows] = useState();
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <div className={styles.container}>
       <Link className={styles.return} href="/dashboard/profile">
@@ -55,8 +65,11 @@ export default function TablePage() {
             maxHeight: "800px",
           }}
         >
-          <DataGrid rows={rows} columns={columns} />
+          <DataGrid loading={isLoading} rows={rows} columns={columns} />
         </Paper>
+        {table === "children" && (
+          <Button variant="contained">Enroll Child</Button>
+        )}
       </div>
     </div>
   );

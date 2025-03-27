@@ -4,12 +4,17 @@ import Box from "@mui/material/Box";
 import styles from "@/modules/components/dashboard/search/CoursePreview.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Course } from "@/schemas/Course";
 
-export default function CoursePreview() {
+interface CoursePreviewProps {
+  course: Partial<Course>;
+}
+
+export default function CoursePreview({ course }: CoursePreviewProps) {
   const router = useRouter();
 
   const onPreviewClick = () => {
-    router.push(`/dashboard/courses/${"123"}/preview`);
+    router.push(`/dashboard/courses/${course.id}/preview`);
   };
 
   return (
@@ -17,7 +22,7 @@ export default function CoursePreview() {
       <Box className={styles.image_preview}>
         <Image src="/static/test-avatar.jpg" fill alt="course preview" />
       </Box>
-      <span>Arithmetic 1</span>
+      <span>{course.courseName}</span>
     </Box>
   );
 }

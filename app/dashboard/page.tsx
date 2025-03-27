@@ -8,6 +8,7 @@ import CourseCard from "@/components/dashboard/CourseCard";
 import Calendar from "react-calendar";
 import Stack from "@mui/material/Stack";
 import { useSession } from "next-auth/react";
+import capitalizeString from "@/utils/capitalizeString";
 
 export default function Dashboard() {
   const { data: session } = useSession();
@@ -42,7 +43,9 @@ export default function Dashboard() {
       <div className={styles.full_page}>
         {/* Left */}
         <div className={styles.main_section}>
-          <span className={styles.welcome_text}>Welcome Back, {name}!</span>
+          <span className={styles.welcome_text}>
+            Welcome Back, {capitalizeString(name || "")}!
+          </span>
           <Grid container spacing={1} rowSpacing={4}>
             <>
               {courses.map((course, index) => {
