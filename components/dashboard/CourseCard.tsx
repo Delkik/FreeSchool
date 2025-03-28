@@ -3,11 +3,14 @@ import CardMedia from "@mui/material/CardMedia";
 import styles from "@/modules/components/dashboard/CourseCard.module.css";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
+import { useRouter } from "next/navigation";
 
 interface CourseCardProps {
   image: string;
   courseTitle: string;
   courseDesc: string;
+  id: string;
+  borrowed: boolean;
   alt?: string;
   grade: number;
 }
@@ -16,10 +19,14 @@ export default function CourseCard({
   image,
   courseDesc,
   courseTitle,
+  id,
+  borrowed,
   alt = "Course Image",
 }: CourseCardProps) {
+  const router = useRouter();
   const onCardClick = () => {
-    console.log(`I've been clicked! ${courseTitle}`);
+    console.log(`I've been clicked! ${id}`);
+    router.push(`/dashboard/courses/${id}?borrowed=${borrowed}`);
   };
 
   return (

@@ -9,34 +9,28 @@ import Calendar from "react-calendar";
 import Stack from "@mui/material/Stack";
 import { useSession } from "next-auth/react";
 import capitalizeString from "@/utils/capitalizeString";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Dashboard() {
   const { data: session } = useSession();
 
   const name = session?.user?.firstName;
+  const [courses, setCourses] = useState<Record<string, string>[]>([]);
 
-  const courses = [
-    {
-      courseTitle: "Algebra 1",
-      courseDesc:
-        "Learn Algebra in this simple course where i say a lot of words and things to make this description longer",
-    },
-    {
-      courseTitle: "Algebra 2",
-      courseDesc:
-        "Learn Algebra in this simple course where i say a lot of words and things to make this description longer",
-    },
-    {
-      courseTitle: "Algebra 2",
-      courseDesc:
-        "Learn Algebra in this simple course where i say a lot of words and things to make this description longer",
-    },
-    {
-      courseTitle: "Algebra 2",
-      courseDesc:
-        "Learn Algebra in this simple course where i say a lot of words and things to make this description longer",
-    },
-  ];
+  useEffect(() => {
+    const fetchInitialCourses = async () => {
+      try {
+        const url = `${process.env.NEXT_PUBLIC_API_URL}/api/courses/user/${session?.user?.id}`;
+        const res = await axios.get(url);
+        setCourses(res.data);
+        console.log(res);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    fetchInitialCourses();
+  }, [session?.user?.id]);
 
   return (
     <Box>
@@ -53,8 +47,10 @@ export default function Dashboard() {
                   <Grid size={3} key={`course-${index}`}>
                     <CourseCard
                       image="/static/test-avatar.jpg"
-                      courseDesc={course.courseDesc}
-                      courseTitle={course.courseTitle}
+                      courseDesc={course?.description || ""}
+                      courseTitle={course?.title || ""}
+                      id={course.courseId}
+                      borrowed={!!course?.borrowDate}
                       grade={100}
                     />
                   </Grid>
