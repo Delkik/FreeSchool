@@ -16,13 +16,18 @@ export default function CoursePreview({ course }: CoursePreviewProps) {
   const onPreviewClick = () => {
     router.push(`/dashboard/courses/${course.id}/preview`);
   };
+  console.log(course);
 
   return (
     <Box className={styles.container} onClick={onPreviewClick}>
       <Box className={styles.image_preview}>
         <Image src="/static/test-avatar.jpg" fill alt="course preview" />
       </Box>
-      <span>{course.courseName}</span>
+      <div>{course.courseName}</div>
+      <div>{course.description}</div>
+      <div>{course.subject}</div>
+      <div>Grade {course.grade}</div>
+      <div>{course.rating} rating</div>
     </Box>
   );
 }
