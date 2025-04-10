@@ -5,11 +5,11 @@ export interface Assignment {
   courseId: string;
   description: string;
   section: number;
-  due: Date;
+  due: string;
 }
 
 export interface UserAssignment {
   userId: string;
   submission: string;
-  submitDate: Date;
+  submitDate: string;
 }

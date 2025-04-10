@@ -1,5 +1,6 @@
 "use client";
 
+import CourseTab from "@/components/dashboard/courses/CourseTab";
 import { Assignment } from "@/schemas/Assignment";
 import { Course } from "@/schemas/Course";
 import Box from "@mui/material/Box";
@@ -8,7 +9,8 @@ import Tabs from "@mui/material/Tabs";
 import axios from "axios";
 // import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { JSX, useEffect, useMemo, useState } from "react";
+// import styles from "@/modules/app/dashboard/courses/Courses.module.css";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,6 +43,7 @@ export default function CoursePage() {
 
   const [courseData, setCourseData] = useState<Course>();
   const [assignments, setAssignments] = useState<Assignment[]>();
+  const [sectionCount, setSectionCount] = useState(0);
 
   const [value, setValue] = useState(0);
 
@@ -64,7 +67,11 @@ export default function CoursePage() {
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_URL}/api/courses/${courseId}/assignments`
         );
-        setAssignments(res.data);
+        const assignmentData: Assignment[] = res.data;
+        setSectionCount(
+          Math.max(...assignmentData.map((assignment) => assignment.section))
+        );
+        setAssignments(assignmentData);
       } catch (e) {
         console.log(e);
       }
@@ -74,15 +81,29 @@ export default function CoursePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(assignments);
+  console.log(assignments, sectionCount);
+
+  const sections = useMemo(() => {
+    const sect: JSX.Element[] = [];
+    for (let i = 1; i <= sectionCount; i++) {
+      const assignmentSection = assignments?.filter((assignment) => {
+        return assignment.section === i;
+      });
+      sect.push(
+        <CourseTab sectionNumber={i} assignments={assignmentSection} />
+      );
+    }
+    return sect;
+  }, [assignments, sectionCount]);
 
   return (
-    <div>
-      <h1>{courseData?.courseName}</h1>
+    <div className="m-10">
+      <h1 className="text-4xl font-bold">{courseData?.courseName}</h1>
       <Tabs
         value={value}
         onChange={handleChange}
         aria-label="basic tabs example"
+        className="w-full border-b"
       >
         <Tab label="Course" />
         <Tab label="Assignments" />
@@ -90,7 +111,13 @@ export default function CoursePage() {
         <Tab label="Grades" />
       </Tabs>
       <CustomTabPanel value={value} index={0}>
-        Section 1
+        <ul>
+          {sections.map((section, index) => (
+            <li key={index} className="mb-10">
+              {section}
+            </li>
+          ))}
+        </ul>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         Coming Up
