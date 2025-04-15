@@ -25,7 +25,6 @@ export default function CourseCard({
 }: CourseCardProps) {
   const router = useRouter();
   const onCardClick = () => {
-    console.log(`I've been clicked! ${id}`);
     router.push(`/dashboard/courses/${id}?borrowed=${borrowed}`);
   };
 

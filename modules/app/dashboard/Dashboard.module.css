@@ -14,10 +14,15 @@
   gap: 30px;
 }
 
+.course_grid {
+  padding-left: 24px;
+}
+
 .full_page {
   display: flex;
   flex-direction: row;
   width: 100%;
+  padding-left: 24px;
 }
 
 .side_section {
