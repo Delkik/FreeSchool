@@ -10,5 +10,5 @@ export interface BaseUser {
   pfp?: string;
   isFirstTime?: boolean;
   parentId?: string;
-  children?: BaseUser[]; // TODO: when logging in, grab all children, but this attribute should not be included in AWS
+  children?: BaseUser[];
 }

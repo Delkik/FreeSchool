@@ -22,7 +22,7 @@ export default function EnrollChildModal({
       <Box className={styles.modalContainer}>
         <div className={styles.modalContent}>
           <h1 className={styles.title}>Enroll a Child</h1>
-          <EnrollChildForm />
+          <EnrollChildForm handlePostSubmit={handleClose} />
         </div>
       </Box>
     </Modal>

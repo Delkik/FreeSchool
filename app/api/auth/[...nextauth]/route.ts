@@ -26,12 +26,16 @@ export const authOptions: AuthOptions = {
           );
 
           const data = await res.json();
-          const { result, user } = data;
+          const { result, user, children } = data;
 
           if (!res.ok || !result.AccessToken) {
             throw new Error(
               data?.error || "Failed to Login. Please try again."
             );
+          }
+
+          if (children) {
+            user.children = children;
           }
 
           if (result?.AccessToken) {
@@ -55,7 +59,11 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      if (trigger === "update" && session?.user) {
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.user = session.user;
+      }
       if (user) {
         token = {
           accessToken: user.accessToken,
