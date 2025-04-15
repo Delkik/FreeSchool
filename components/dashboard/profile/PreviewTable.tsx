@@ -17,6 +17,8 @@ export default function PreviewTable({ title }: PreviewTableProps) {
     router.push(`/dashboard/profile/table?table=${title.toLowerCase()}`);
   };
 
+  // TODO: Switch case for tables
+
   return (
     <Box className={styles.container}>
       <div className={styles.table_title}>{title}</div>

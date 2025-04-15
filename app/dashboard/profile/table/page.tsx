@@ -8,7 +8,7 @@ import capitalizeString from "@/utils/capitalizeString";
 
 import styles from "@/modules/app/dashboard/profile/table/Table.module.css";
 import { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
+import EnrollChildButton from "@/components/dashboard/profile/table/EnrollChildButton";
 
 const columns: GridColDef[] = [
   { field: "id", headerName: "ID", width: 70 },
@@ -67,9 +67,7 @@ export default function TablePage() {
         >
           <DataGrid loading={isLoading} rows={rows} columns={columns} />
         </Paper>
-        {table === "children" && (
-          <Button variant="contained">Enroll Child</Button>
-        )}
+        {table === "children" && <EnrollChildButton />}
       </div>
     </div>
   );
