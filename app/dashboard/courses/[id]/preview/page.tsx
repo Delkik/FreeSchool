@@ -3,45 +3,23 @@
 import Box from "@mui/material/Box";
 import styles from "@/modules/app/dashboard/courses/preview/Preview.module.css";
 import Button from "@mui/material/Button";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Course } from "@/schemas/Course";
 import axios from "axios";
 import clsx from "clsx";
+import EnrollModal from "@/components/dashboard/courses/preview/EnrollModal";
 import { useSession } from "next-auth/react";
 
 export default function PreviewPage() {
   const { data: session } = useSession();
-  const router = useRouter();
   const pathname = usePathname();
   const idRegex = /courses\/(.+)\/preview/;
   const courseId = idRegex.exec(pathname)?.[1];
 
   const [courseData, setCourseData] = useState<Course>();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const onBorrowEnrollClick = async (borrow: boolean) => {
-    setIsLoading(true);
-    try {
-      const url = `${
-        process.env.NEXT_PUBLIC_API_URL
-      }/api/courses/${courseId}/user/${session?.user?.id}/${
-        borrow ? "borrow" : "enroll"
-      }`;
-      const res = await axios.post(url, {
-        title: courseData?.courseName,
-        description: courseData?.description,
-      });
-      if (res.data?.message) {
-        throw new Error(res.data.message);
-      }
-      console.log(res);
-      router.push(`/dashboard/courses/${courseId}?borrowed=${borrow}`);
-    } catch (e) {
-      console.log(e);
-    }
-    setIsLoading(false);
-  };
+  const [enrollOpen, setEnrollOpen] = useState(false);
+  const [borrow, setBorrow] = useState(false);
 
   useEffect(() => {
     const fetchInitialCourseData = async () => {
@@ -64,24 +42,35 @@ export default function PreviewPage() {
         <Box className={styles.header}>
           <div className={styles.class_title}>{courseData?.courseName}</div>
           <div className={styles.class_desc}>{courseData?.description}</div>
-          {/* TODO: disabled: this is not gonna be available by the presentation most likely */}
           <Box className={styles.enroll_buttons_container}>
             <Button
               variant="contained"
-              disabled={isLoading}
               className={styles.enroll_button}
-              onClick={() => onBorrowEnrollClick(false)}
+              disabled={!session?.user?.children?.length}
+              onClick={() => {
+                setBorrow(false);
+                setEnrollOpen(true);
+              }}
             >
               Enroll
             </Button>
             <Button
               variant="contained"
               className={styles.enroll_button}
-              onClick={() => onBorrowEnrollClick(true)}
-              disabled={isLoading}
+              disabled={!session?.user?.children?.length}
+              onClick={() => {
+                setBorrow(true);
+                setEnrollOpen(true);
+              }}
             >
               Borrow Class
             </Button>
+            <EnrollModal
+              open={enrollOpen}
+              handleClose={() => setEnrollOpen(false)}
+              borrow={borrow}
+              course={courseData}
+            />
           </Box>
         </Box>
         <Box className={styles.top_space}></Box>
