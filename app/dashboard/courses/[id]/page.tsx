@@ -61,6 +61,7 @@ export default function CoursePage() {
       } catch (e) {
         console.log(e);
       }
+      fetchAssignments();
     };
     const fetchAssignments = async () => {
       try {
@@ -77,11 +78,8 @@ export default function CoursePage() {
       }
     };
     fetchInitialCourseData();
-    fetchAssignments();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(assignments, sectionCount);
 
   const sections = useMemo(() => {
     const sect: JSX.Element[] = [];

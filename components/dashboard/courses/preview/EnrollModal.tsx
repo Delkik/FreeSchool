@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import styles from "@/modules/components/dashboard/courses/preview/EnrollModal.module.css";
+
 interface EnrollModal {
   open: boolean;
   handleClose: () => void;
@@ -40,7 +42,7 @@ export default function EnrollModal({
       }
       console.log(res);
       router.push(
-        `/dashboard/courses/${course?.id}${borrow && "?borrowed=true"}`
+        `/dashboard/courses/${course?.id}${borrow ? "?borrowed=true" : ""}`
       );
     } catch (e) {
       console.log(e);
@@ -58,7 +60,7 @@ export default function EnrollModal({
     <BaseModal title={title} handleClose={handleClose} open={open}>
       <ul>
         {children?.map((child) => (
-          <li key={child.id}>
+          <li key={child.id} className={styles.borrow_row}>
             <div>
               {child.firstName} {child.lastName}
             </div>
