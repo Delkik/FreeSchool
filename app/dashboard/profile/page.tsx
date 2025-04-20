@@ -21,13 +21,41 @@ export default function ProfilePage() {
     await signOut();
   };
 
+  const getTables = () => {
+    let tables = null;
+    switch (user?.role) {
+      case "parent":
+        tables = (
+          <>
+            <PreviewTable title="Documents" />
+            <PreviewTable title="Children" />
+          </>
+        );
+        break;
+      case "teacher":
+        tables = (
+          <>
+            <PreviewTable title="Documents" />
+            <PreviewTable title="Courses" />
+          </>
+        );
+        break;
+      case "student":
+        tables = (
+          <>
+            <PreviewTable title="Grades" />
+            <PreviewTable title="Courses" />
+          </>
+        );
+        break;
+    }
+    return tables;
+  };
+
   return (
     <Box className="flex flex-col gap-10">
       <ProfileBar title={capitalizeString(role)} name={name} />
-      <Box className="flex gap-5 justify-evenly">
-        <PreviewTable title="Documents" />
-        <PreviewTable title="Children" />
-      </Box>
+      <Box className="flex gap-5 justify-evenly">{getTables()}</Box>
       <Button onClick={onSignOut}>Sign Out</Button>
     </Box>
   );

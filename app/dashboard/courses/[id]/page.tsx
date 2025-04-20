@@ -1,5 +1,6 @@
 "use client";
 
+import AssignmentsTab from "@/components/dashboard/courses/AssignmentsTab";
 import CourseTab from "@/components/dashboard/courses/CourseTab";
 import { Assignment } from "@/schemas/Assignment";
 import { Course } from "@/schemas/Course";
@@ -118,7 +119,7 @@ export default function CoursePage() {
         </ul>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Coming Up
+        <AssignmentsTab assignments={assignments} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         Huh

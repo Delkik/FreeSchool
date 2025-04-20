@@ -1,5 +1,6 @@
 import { Assignment } from "@/schemas/Assignment";
 import styles from "@/modules/components/dashboard/courses/CourseTab.module.css";
+import Link from "next/link";
 
 interface CourseTabProps {
   sectionNumber: number;
@@ -20,11 +21,15 @@ export default function CourseTab({
       <ul>
         {assignments.map((assignment, index) => (
           <li key={index} className={styles.assignmentRow}>
-            <span>{assignment.name}</span>
-            <div className={styles.bottomSection}>
-              <span>{assignment.due}</span>
-              <span>{assignment.maxGrade} pts</span>
-            </div>
+            <Link
+              href={`/dashboard/courses/${assignment.courseId}/assignments/${assignment.id}`}
+            >
+              <span>{assignment.name}</span>
+              <div className={styles.bottomSection}>
+                <span>{assignment.due}</span>
+                <span>{assignment.maxGrade} pts</span>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>
