@@ -46,7 +46,10 @@ export default function PreviewPage() {
             <Button
               variant="contained"
               className={styles.enroll_button}
-              disabled={!session?.user?.children?.length}
+              disabled={
+                !session?.user?.children?.length ||
+                session?.user?.role !== "parent"
+              }
               onClick={() => {
                 setBorrow(false);
                 setEnrollOpen(true);
@@ -57,7 +60,10 @@ export default function PreviewPage() {
             <Button
               variant="contained"
               className={styles.enroll_button}
-              disabled={!session?.user?.children?.length}
+              disabled={
+                !session?.user?.children?.length ||
+                session?.user?.role !== "parent"
+              }
               onClick={() => {
                 setBorrow(true);
                 setEnrollOpen(true);
