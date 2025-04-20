@@ -11,4 +11,5 @@ export interface BaseUser {
   isFirstTime?: boolean;
   parentId?: string;
   children?: BaseUser[];
+  rating?: number;
 }
