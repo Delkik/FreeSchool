@@ -3,11 +3,14 @@ import styles from "@/modules/components/dashboard/courses/CourseTab.module.css"
 import Link from "next/link";
 
 interface AssignmentsTabProps {
-  assignments: Assignment[] | undefined;
+  assignments?: Assignment[];
+  childId?: string;
 }
 
-export default function AssignmentsTab({ assignments }: AssignmentsTabProps) {
-  console.log("assignments", assignments);
+export default function AssignmentsTab({
+  assignments,
+  childId,
+}: AssignmentsTabProps) {
   if (!assignments) {
     return;
   }
@@ -33,6 +36,8 @@ export default function AssignmentsTab({ assignments }: AssignmentsTabProps) {
         new Date(a.due || today).getTime() - new Date(b.due || today).getTime()
     );
 
+  console.log(childId);
+
   return (
     <div>
       <div className={styles.container}>
@@ -41,7 +46,9 @@ export default function AssignmentsTab({ assignments }: AssignmentsTabProps) {
           {dueAssignments.map((assignment, index) => (
             <li key={index} className={styles.assignmentRow}>
               <Link
-                href={`/dashboard/courses/${assignment.courseId}/assignments/${assignment.id}`}
+                href={`/dashboard/courses/${assignment.courseId}/assignments/${
+                  assignment.id
+                }${childId ? `?child=${childId}` : ""}`}
               >
                 <span>{assignment.name}</span>
                 <div className={styles.bottomSection}>
@@ -60,7 +67,9 @@ export default function AssignmentsTab({ assignments }: AssignmentsTabProps) {
           {pastAssignments.map((assignment, index) => (
             <li key={index} className={styles.assignmentRow}>
               <Link
-                href={`/dashboard/courses/${assignment.courseId}/assignments/${assignment.id}`}
+                href={`/dashboard/courses/${assignment.courseId}/assignments/${
+                  assignment.id
+                }${assignment.id}${childId ? `?child=${childId}` : ""}`}
               >
                 <span>{assignment.name}</span>
                 <div className={styles.bottomSection}>

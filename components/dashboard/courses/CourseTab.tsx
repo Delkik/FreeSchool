@@ -4,14 +4,15 @@ import Link from "next/link";
 
 interface CourseTabProps {
   sectionNumber: number;
-  assignments: Assignment[] | undefined;
+  assignments?: Assignment[];
+  childId?: string;
 }
 
 export default function CourseTab({
   sectionNumber,
   assignments,
+  childId,
 }: CourseTabProps) {
-  console.log("assignments", assignments);
   if (!assignments) {
     return;
   }
@@ -22,7 +23,9 @@ export default function CourseTab({
         {assignments.map((assignment, index) => (
           <li key={index} className={styles.assignmentRow}>
             <Link
-              href={`/dashboard/courses/${assignment.courseId}/assignments/${assignment.id}`}
+              href={`/dashboard/courses/${assignment.courseId}/assignments/${
+                assignment.id
+              }${assignment.id}${childId ? `?child=${childId}` : ""}`}
             >
               <span>{assignment.name}</span>
               <div className={styles.bottomSection}>

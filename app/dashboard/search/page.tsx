@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styles from "@/modules/app/dashboard/search/Search.module.css";
 
 export default function SearchPage() {
   const [searchValue, setSearchValue] = useState("");
@@ -70,11 +71,15 @@ export default function SearchPage() {
           another search!
         </span>
       ) : (
-        <>
+        <ul className={styles.grid}>
           {data.map((course) => {
-            return <CoursePreview course={course} key={course.id} />;
+            return (
+              <li key={course.id}>
+                <CoursePreview course={course} />
+              </li>
+            );
           })}
-        </>
+        </ul>
       )}
     </Box>
   );

@@ -2,13 +2,15 @@
 
 import AssignmentsTab from "@/components/dashboard/courses/AssignmentsTab";
 import CourseTab from "@/components/dashboard/courses/CourseTab";
+import GradesTab from "@/components/dashboard/courses/GradesTab";
 import { Assignment } from "@/schemas/Assignment";
 import { Course } from "@/schemas/Course";
+import { Grade } from "@/schemas/Grade";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import axios from "axios";
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { JSX, useEffect, useMemo, useState } from "react";
 // import styles from "@/modules/app/dashboard/courses/Courses.module.css";
@@ -36,14 +38,18 @@ function CustomTabPanel(props: TabPanelProps) {
 }
 
 export default function CoursePage() {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
 
   const pathname = usePathname();
   const idRegex = /courses\/(.+)(\?borrowed=)?/;
+  const childRegex = /&child=(.+)/gm;
   const courseId = idRegex.exec(pathname)?.[1];
+  const childId = childRegex.exec(window.location.search)?.[1];
+  const userId = childId || session?.user?.id;
 
   const [courseData, setCourseData] = useState<Course>();
   const [assignments, setAssignments] = useState<Assignment[]>();
+  const [grades, setGrades] = useState<Grade[]>();
   const [sectionCount, setSectionCount] = useState(0);
 
   const [value, setValue] = useState(0);
@@ -62,7 +68,6 @@ export default function CoursePage() {
       } catch (e) {
         console.log(e);
       }
-      fetchAssignments();
     };
     const fetchAssignments = async () => {
       try {
@@ -78,7 +83,33 @@ export default function CoursePage() {
         console.log(e);
       }
     };
+    // const fetchGrade = async () => {
+    //   try {
+    //     const res = await axios.get(
+    //       `${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/grades/courses/${courseId}`
+    //     );
+    //     const gradeData: Grade[] = res.data.grades;
+    //     console.log(gradeData);
+    //     setGrades(gradeData);
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // };
+    const fetchGrades = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/grades/courses/${courseId}/assignments`
+        );
+        const gradeData: Grade[] = res.data.grades;
+        console.log(gradeData);
+        setGrades(gradeData);
+      } catch (e) {
+        console.log(e);
+      }
+    };
     fetchInitialCourseData();
+    fetchAssignments();
+    fetchGrades();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -89,11 +120,15 @@ export default function CoursePage() {
         return assignment.section === i;
       });
       sect.push(
-        <CourseTab sectionNumber={i} assignments={assignmentSection} />
+        <CourseTab
+          childId={childId}
+          sectionNumber={i}
+          assignments={assignmentSection}
+        />
       );
     }
     return sect;
-  }, [assignments, sectionCount]);
+  }, [assignments, childId, sectionCount]);
 
   return (
     <div className="m-10">
@@ -119,13 +154,13 @@ export default function CoursePage() {
         </ul>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <AssignmentsTab assignments={assignments} />
+        <AssignmentsTab assignments={assignments} childId={childId} />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Huh
+        People
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        Grades
+        <GradesTab grades={grades} assignments={assignments} />
       </CustomTabPanel>
     </div>
   );

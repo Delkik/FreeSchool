@@ -6,11 +6,12 @@ import { useState } from "react";
 import styles from "@/modules/components/dashboard/ChildCourse.module.css";
 
 interface ChildCourseProps {
+  userId: string;
   child: BaseUser;
 }
 
-export default function ChildCourse({ child }: ChildCourseProps) {
-  const [isOpen, setOpen] = useState(false);
+export default function ChildCourse({ userId, child }: ChildCourseProps) {
+  const [isOpen, setOpen] = useState(true);
   return (
     <div>
       <div className={styles.child_header}>
@@ -25,7 +26,7 @@ export default function ChildCourse({ child }: ChildCourseProps) {
           )}
         </button>
       </div>
-      {isOpen && <CourseGrid userId={child.id} />}
+      {isOpen && <CourseGrid userId={userId} childId={child.id} />}
     </div>
   );
 }

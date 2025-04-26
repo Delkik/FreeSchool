@@ -10,6 +10,7 @@ interface CourseCardProps {
   courseTitle: string;
   courseDesc: string;
   id: string;
+  childId?: string;
   borrowed: boolean;
   alt?: string;
   grade: number;
@@ -20,12 +21,17 @@ export default function CourseCard({
   courseDesc,
   courseTitle,
   id,
+  childId,
   borrowed,
   alt = "Course Image",
 }: CourseCardProps) {
   const router = useRouter();
   const onCardClick = () => {
-    router.push(`/dashboard/courses/${id}?borrowed=${borrowed}`);
+    router.push(
+      `/dashboard/courses/${id}?borrowed=${borrowed}${
+        childId ? `&child=${childId}` : ""
+      }`
+    );
   };
 
   return (

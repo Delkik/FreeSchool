@@ -1,13 +1,14 @@
-import Grid from "@mui/material/Grid2";
 import CourseCard from "./CourseCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import styles from "@/modules/components/dashboard/CourseGrid.module.css";
 
 interface CourseGridProps {
-  userId: string | undefined;
+  userId?: string;
+  childId?: string;
 }
 
-export default function CourseGrid({ userId }: CourseGridProps) {
+export default function CourseGrid({ userId, childId }: CourseGridProps) {
   const [courses, setCourses] = useState<Record<string, string>[]>([]);
 
   useEffect(() => {
@@ -21,28 +22,29 @@ export default function CourseGrid({ userId }: CourseGridProps) {
         console.log(e);
       }
     };
-    fetchInitialCourses(userId);
-  }, [userId]);
+    fetchInitialCourses(childId || userId);
+  }, [childId, userId]);
 
   return (
     <>
       {courses.length ? (
-        <Grid container spacing={1} rowSpacing={4}>
+        <ul className={styles.container}>
           {courses.map((course, index) => {
             return (
-              <Grid size={3} key={`course-${index}`}>
+              <li key={index} className={styles.item}>
                 <CourseCard
                   image="/static/test-avatar.jpg"
                   courseDesc={course?.description || ""}
                   courseTitle={course?.title || ""}
                   id={course.courseId}
+                  childId={childId}
                   borrowed={!!course?.borrowDate}
                   grade={100}
                 />
-              </Grid>
+              </li>
             );
           })}
-        </Grid>
+        </ul>
       ) : (
         <p>Nothing here D:</p>
       )}

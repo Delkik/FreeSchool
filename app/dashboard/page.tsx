@@ -25,7 +25,7 @@ export default function Dashboard() {
           <ul>
             {session.user.children.map((child) => (
               <li key={child.id}>
-                <ChildCourse child={child} />
+                <ChildCourse userId={session.user!.id} child={child} />
               </li>
             ))}
           </ul>
@@ -48,6 +48,8 @@ export default function Dashboard() {
     return courseGrid;
   };
 
+  const grid = getCourseGrid();
+
   return (
     <Box>
       <div className={styles.full_page}>
@@ -56,7 +58,7 @@ export default function Dashboard() {
           <span className={styles.welcome_text}>
             Welcome Back, {capitalizeString(name || "")}!
           </span>
-          <span className={styles.course_grid}>{getCourseGrid()}</span>
+          <span className={styles.course_grid}>{grid}</span>
         </div>
 
         {/* Right */}
