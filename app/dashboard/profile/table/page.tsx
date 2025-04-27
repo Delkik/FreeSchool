@@ -7,47 +7,68 @@ import Link from "next/link";
 import capitalizeString from "@/utils/capitalizeString";
 
 import styles from "@/modules/app/dashboard/profile/table/Table.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import EnrollChildButton from "@/components/dashboard/profile/table/EnrollChildButton";
-
-const columns: GridColDef[] = [
-  { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
-  { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (_, row) => `${row.firstName || ""} ${row.lastName || ""}`,
-  },
-];
-
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-];
+import getTable from "@/utils/getTable";
+import { useSession } from "next-auth/react";
+import { camelCaseToSpaces } from "@/utils/camelCaseToSpaces";
 
 export default function TablePage() {
+  const { data: session } = useSession();
+
   const searchParams = useSearchParams();
-  const table = searchParams.get("table") || "documents";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const table: any = searchParams.get("table") || "documents";
 
   const [isLoading, setIsLoading] = useState(false);
-  // const [dataColumns, setDataColumns] = useState();
-  // const [dataRows, setDataRows] = useState();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [data, setData] = useState<Record<string, any>[]>([]);
 
   useEffect(() => {
-    setIsLoading(false);
-  }, []);
+    const fetchData = async () => {
+      if (!session?.user?.id) {
+        return;
+      }
+
+      setIsLoading(true);
+
+      const d = await getTable({ table, userId: session?.user?.id });
+      console.log(d);
+      setData(d);
+
+      setIsLoading(false);
+    };
+    fetchData();
+  }, [session?.user?.id, table]);
+
+  const cols = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+    if (!data.length) {
+      return [];
+    }
+    return Object.keys(data[0])
+      .filter((key) => {
+        return !(key === "PK" || key === "SK");
+      })
+      .map((key) => {
+        const col: GridColDef = {
+          field: key,
+          headerName: camelCaseToSpaces(key),
+          width: 160,
+        };
+        return col;
+      })
+      .sort((a, b) => a.field.localeCompare(b.field));
+  }, [data]);
+
+  const rows = useMemo(() => {
+    return data.map((d, index) => ({
+      id: index,
+      ...d,
+    }));
+  }, [data]);
 
   return (
     <div className={styles.container}>
@@ -65,7 +86,7 @@ export default function TablePage() {
             maxHeight: "800px",
           }}
         >
-          <DataGrid loading={isLoading} rows={rows} columns={columns} />
+          <DataGrid loading={isLoading} rows={rows || []} columns={cols} />
         </Paper>
         {table === "children" && <EnrollChildButton />}
       </div>

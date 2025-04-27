@@ -27,24 +27,24 @@ export default function ProfilePage() {
       case "parent":
         tables = (
           <>
-            <PreviewTable title="Documents" />
-            <PreviewTable title="Children" />
+            <PreviewTable title="documents" />
+            <PreviewTable title="children" />
           </>
         );
         break;
       case "teacher":
         tables = (
           <>
-            <PreviewTable title="Documents" />
-            <PreviewTable title="Courses" />
+            <PreviewTable title="documents" />
+            <PreviewTable title="courses" />
           </>
         );
         break;
       case "student":
         tables = (
           <>
-            <PreviewTable title="Grades" />
-            <PreviewTable title="Courses" />
+            <PreviewTable title="grades" />
+            <PreviewTable title="courses" />
           </>
         );
         break;
