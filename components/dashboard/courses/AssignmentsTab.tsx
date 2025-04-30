@@ -69,7 +69,7 @@ export default function AssignmentsTab({
               <Link
                 href={`/dashboard/courses/${assignment.courseId}/assignments/${
                   assignment.id
-                }${assignment.id}${childId ? `?child=${childId}` : ""}`}
+                }${childId ? `?child=${childId}` : ""}`}
               >
                 <span>{assignment.name}</span>
                 <div className={styles.bottomSection}>

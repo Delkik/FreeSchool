@@ -12,6 +12,7 @@ import EnrollChildButton from "@/components/dashboard/profile/table/EnrollChildB
 import getTable from "@/utils/getTable";
 import { useSession } from "next-auth/react";
 import { camelCaseToSpaces } from "@/utils/camelCaseToSpaces";
+import { getUniqueKeys } from "@/utils/getUniqueKeys";
 
 export default function TablePage() {
   const { data: session } = useSession();
@@ -48,9 +49,14 @@ export default function TablePage() {
     if (!data.length) {
       return [];
     }
-    return Object.keys(data[0])
+    return getUniqueKeys(data)
+      .sort()
       .filter((key) => {
-        return !(key === "PK" || key === "SK");
+        return !(
+          key === "PK" ||
+          key === "SK" ||
+          key.toLowerCase().includes("id")
+        );
       })
       .map((key) => {
         const col: GridColDef = {
@@ -59,8 +65,7 @@ export default function TablePage() {
           width: 160,
         };
         return col;
-      })
-      .sort((a, b) => a.field.localeCompare(b.field));
+      });
   }, [data]);
 
   const rows = useMemo(() => {

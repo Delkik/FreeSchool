@@ -35,7 +35,7 @@ export default function CourseGrid({ userId, childId }: CourseGridProps) {
                 <CourseCard
                   image="/static/test-avatar.jpg"
                   courseDesc={course?.description || ""}
-                  courseTitle={course?.title || ""}
+                  courseTitle={course?.courseName || ""}
                   id={course.courseId}
                   childId={childId}
                   borrowed={!!course?.borrowDate}

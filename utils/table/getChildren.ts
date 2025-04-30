@@ -4,7 +4,7 @@ import axios from "axios";
 export default async function getChildren(userId: string, preview: boolean) {
   try {
     const res = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/user/${userId}/children`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/children`
     );
 
     const data: BaseUser[] = res.data;
