@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { BaseUser } from "@/schemas/User";
 
 interface ChildSignUpForm {
   name: string;
@@ -77,24 +78,30 @@ export default function EnrollChildForm({
       });
 
       const json = await response.json();
-      console.log(json);
 
-      if (json.user) {
-        const child = json.user;
+      const child: BaseUser = json.user;
+      if (child) {
         const user = session!.user!;
         user.children = user.children || [];
         user.children.push(child);
+
+        const url2 = `${process.env.NEXT_PUBLIC_API_URL}/api/users/${session?.user?.id}/documents/ihip`;
+
+        await fetch(url2, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            childName: child.firstName,
+            grade: child.grade,
+          }),
+        });
+
         await update({ user });
       } else {
         throw new Error(json.error);
       }
-
-      // TODO: need to confirm user
-      // if (json.Session) {
-      //   router.push(`/sign-up/confirm?email=${email}`);
-      // } else {
-      //   throw new Error(json.error);
-      // }
 
       handlePostSubmit?.();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

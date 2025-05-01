@@ -38,7 +38,6 @@ export default function PreviewTable({ title }: PreviewTableProps) {
         preview: true,
       });
       setTableData(data);
-      console.log(data);
     };
     fetchData();
   }, [session?.user?.id, title]);
@@ -53,7 +52,6 @@ export default function PreviewTable({ title }: PreviewTableProps) {
           <li key={`row-${index}`}>
             <div>
               {Object.keys(row).map((rowKey, index) => {
-                console.log(row[rowKey]);
                 return <span key={`not-row-${index}`}>{row[rowKey]}</span>;
               })}
             </div>

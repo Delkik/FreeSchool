@@ -34,7 +34,6 @@ export default function TablePage() {
       setIsLoading(true);
 
       const d = await getTable({ table, userId: session?.user?.id });
-      console.log(d);
       setData(d);
 
       setIsLoading(false);

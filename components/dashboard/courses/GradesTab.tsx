@@ -19,7 +19,6 @@ export default function GradesTab({ grades, assignments }: GradesTabProps) {
       sortComparator: (a, b) => {
         const aDate = new Date(a);
         const bDate = new Date(b);
-        console.log(bDate, aDate);
         return aDate.getDate() - bDate.getDate();
       },
     },
@@ -41,7 +40,6 @@ export default function GradesTab({ grades, assignments }: GradesTabProps) {
   const rows = a?.map((value, index) => {
     return { ...value, ...g?.[index] };
   });
-  console.log(rows);
 
   return (
     <div>

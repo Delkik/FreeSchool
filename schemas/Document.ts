@@ -1,7 +1,7 @@
 export interface Document {
   id: string;
-  title: string;
   link: string;
+  title: string;
+  description?: string;
   ownerId: string;
-  createdAt: Date;
 }

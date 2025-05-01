@@ -40,7 +40,6 @@ export default function EnrollModal({
       if (res.data?.message) {
         throw new Error(res.data.message);
       }
-      console.log(res);
       router.push(
         `/dashboard/courses/${course?.id}${borrow ? "?borrowed=true" : ""}`
       );

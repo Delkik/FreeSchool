@@ -101,7 +101,6 @@ export default function CoursePage() {
           `${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/grades/courses/${courseId}/assignments`
         );
         const gradeData: Grade[] = res.data.grades;
-        console.log(gradeData);
         setGrades(gradeData);
       } catch (e) {
         console.log(e);

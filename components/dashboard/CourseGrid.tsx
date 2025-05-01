@@ -17,7 +17,6 @@ export default function CourseGrid({ userId, childId }: CourseGridProps) {
         const url = `${process.env.NEXT_PUBLIC_API_URL}/api/courses/user/${id}`;
         const res = await axios.get(url);
         setCourses(res.data);
-        console.log(res);
       } catch (e) {
         console.log(e);
       }

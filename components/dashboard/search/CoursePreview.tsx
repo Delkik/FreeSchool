@@ -16,7 +16,6 @@ export default function CoursePreview({ course }: CoursePreviewProps) {
   const onPreviewClick = () => {
     router.push(`/dashboard/courses/${course.id}/preview`);
   };
-  console.log(course);
 
   return (
     <Box className={styles.container} onClick={onPreviewClick}>

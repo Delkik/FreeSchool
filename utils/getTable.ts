@@ -2,6 +2,7 @@ import { Role } from "@/schemas/User";
 import getGrades from "./table/getGrades";
 import getChildren from "./table/getChildren";
 import getCourses from "./table/getCourses";
+import getDocuments from "./table/getDocuments";
 
 interface GetTableProps {
   table: "courses" | "grades" | "children" | "documents";
@@ -21,7 +22,7 @@ export default async function getTable({
     case "children":
       return await getChildren(userId, preview);
     case "documents":
-      return [];
+      return await getDocuments(userId, preview);
     case "grades":
       return await getGrades(userId, preview);
   }

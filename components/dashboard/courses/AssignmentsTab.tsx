@@ -36,8 +36,6 @@ export default function AssignmentsTab({
         new Date(a.due || today).getTime() - new Date(b.due || today).getTime()
     );
 
-  console.log(childId);
-
   return (
     <div>
       <div className={styles.container}>
