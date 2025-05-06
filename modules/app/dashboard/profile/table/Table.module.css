@@ -1,7 +1,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .return {
@@ -12,4 +11,11 @@
   font-size: 2.6rem;
   font-weight: bold;
   margin-bottom: 10px;
+  padding-top: 20px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

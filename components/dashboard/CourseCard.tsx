@@ -36,12 +36,7 @@ export default function CourseCard({
 
   return (
     <Card className={styles.course}>
-      <CardActionArea
-        sx={{ height: "100%", position: "relative" }}
-        onClick={onCardClick}
-      >
-        {/* //TODO: */}
-        {/* <Badge className={styles.course_grade}>{grade}%</Badge> */}
+      <CardActionArea onClick={onCardClick}>
         <CardMedia
           component="img"
           image={image}
@@ -50,7 +45,11 @@ export default function CourseCard({
         />
         <CardContent className={styles.course_content}>
           <span className={styles.course_title}>{courseTitle}</span>
-          <span className={styles.course_desc}>{courseDesc}</span>
+          <span className={styles.course_desc}>
+            {courseDesc.length > 65
+              ? courseDesc.slice(0, 65).trim() + "..."
+              : courseDesc}
+          </span>
         </CardContent>
       </CardActionArea>
     </Card>

@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import getTable from "@/utils/getTable";
 import { useSession } from "next-auth/react";
 import capitalizeString from "@/utils/capitalizeString";
+import clsx from "clsx";
 
 interface PreviewTableProps {
   title: "courses" | "grades" | "children" | "documents";
@@ -47,17 +48,22 @@ export default function PreviewTable({ title }: PreviewTableProps) {
       <div className={styles.table_title}>{capitalizeString(title)}</div>
       {/* TODO: list some data */}
 
-      <ul>
-        {tableData.map((row, index) => (
-          <li key={`row-${index}`}>
-            <div>
-              {Object.keys(row).map((rowKey, index) => {
-                return <span key={`not-row-${index}`}>{row[rowKey]}</span>;
-              })}
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.dataContainer}>
+        <ul className={styles.data}>
+          {tableData.map((row, index) => (
+            <li
+              key={`row-${index}`}
+              className={clsx(styles.row, "even:bg-[var(--doe-orange)]")}
+            >
+              <div className={styles.rowData}>
+                {Object.keys(row).map((rowKey, index) => {
+                  return <span key={`not-row-${index}`}>{row[rowKey]}</span>;
+                })}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {/* TODO: link to the table page, use query parameters to know data? */}
       <Button variant="outlined" onClick={handleOnClick}>

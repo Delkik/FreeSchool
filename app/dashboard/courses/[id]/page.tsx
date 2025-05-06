@@ -13,7 +13,7 @@ import axios from "axios";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { JSX, useEffect, useMemo, useState } from "react";
-// import styles from "@/modules/app/dashboard/courses/Courses.module.css";
+import styles from "@/modules/app/dashboard/courses/Courses.module.css";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -83,18 +83,6 @@ export default function CoursePage() {
         console.log(e);
       }
     };
-    // const fetchGrade = async () => {
-    //   try {
-    //     const res = await axios.get(
-    //       `${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}/grades/courses/${courseId}`
-    //     );
-    //     const gradeData: Grade[] = res.data.grades;
-    //     console.log(gradeData);
-    //     setGrades(gradeData);
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    // };
     const fetchGrades = async () => {
       try {
         const res = await axios.get(
@@ -130,8 +118,8 @@ export default function CoursePage() {
   }, [assignments, childId, sectionCount]);
 
   return (
-    <div className="m-10">
-      <h1 className="text-4xl font-bold">{courseData?.courseName}</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>{courseData?.courseName}</h1>
       <Tabs
         value={value}
         onChange={handleChange}

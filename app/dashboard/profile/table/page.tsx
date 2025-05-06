@@ -79,18 +79,34 @@ export default function TablePage() {
       <Link className={styles.return} href="/dashboard/profile">
         {"<"} Back to User Page
       </Link>
-      <div>
-        <h1 className={styles.title}>{capitalizeString(table)}</h1>
+      <h1 className={styles.title}>{capitalizeString(table)}</h1>
+      <div className={styles.table}>
         <Paper
           sx={{
             width: "100%",
             display: "flex",
             flexDirection: "column",
-            minHeight: "400px",
-            maxHeight: "800px",
+            minHeight: "300px",
+            maxHeight: "600px",
           }}
         >
-          <DataGrid loading={isLoading} rows={rows || []} columns={cols} />
+          <DataGrid
+            loading={isLoading}
+            rows={rows || []}
+            columns={cols}
+            sx={{
+              "& .MuiDataGrid-row:hover": {
+                backgroundColor: "#e0f7fa",
+              },
+              "& .MuiDataGrid-cell": {
+                borderBottom: "1px solid #ddd",
+              },
+              "& .MuiDataGrid-columnHeaders .MuiDataGrid-filler, .MuiToolbar-root, .MuiDataGrid-columnHeader":
+                {
+                  backgroundColor: "var(--doe-green)",
+                },
+            }}
+          />
         </Paper>
         {table === "children" && <EnrollChildButton />}
       </div>

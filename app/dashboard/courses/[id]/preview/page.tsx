@@ -41,43 +41,45 @@ export default function PreviewPage() {
       <Box className={styles.top_container}>
         <Box className={styles.header}>
           <div className={styles.class_title}>{courseData?.courseName}</div>
-          <div className={styles.class_desc}>{courseData?.description}</div>
-          <Box className={styles.enroll_buttons_container}>
-            <Button
-              variant="contained"
-              className={styles.enroll_button}
-              disabled={
-                !session?.user?.children?.length ||
-                session?.user?.role !== "parent"
-              }
-              onClick={() => {
-                setBorrow(false);
-                setEnrollOpen(true);
-              }}
-            >
-              Enroll
-            </Button>
-            <Button
-              variant="contained"
-              className={styles.enroll_button}
-              disabled={
-                !session?.user?.children?.length ||
-                session?.user?.role !== "parent"
-              }
-              onClick={() => {
-                setBorrow(true);
-                setEnrollOpen(true);
-              }}
-            >
-              Borrow Class
-            </Button>
-            <EnrollModal
-              open={enrollOpen}
-              handleClose={() => setEnrollOpen(false)}
-              borrow={borrow}
-              course={courseData}
-            />
-          </Box>
+          <div className={styles.class_actions}>
+            <div className={styles.class_desc}>{courseData?.description}</div>
+            <Box className={styles.enroll_buttons_container}>
+              <Button
+                variant="contained"
+                className={styles.enroll_button}
+                disabled={
+                  !session?.user?.children?.length ||
+                  session?.user?.role !== "parent"
+                }
+                onClick={() => {
+                  setBorrow(false);
+                  setEnrollOpen(true);
+                }}
+              >
+                Enroll
+              </Button>
+              <Button
+                variant="contained"
+                className={styles.enroll_button}
+                disabled={
+                  !session?.user?.children?.length ||
+                  session?.user?.role !== "parent"
+                }
+                onClick={() => {
+                  setBorrow(true);
+                  setEnrollOpen(true);
+                }}
+              >
+                Borrow Class
+              </Button>
+              <EnrollModal
+                open={enrollOpen}
+                handleClose={() => setEnrollOpen(false)}
+                borrow={borrow}
+                course={courseData}
+              />
+            </Box>
+          </div>
         </Box>
         <Box className={styles.top_space}></Box>
         <Box className={styles.quick_info_container}>

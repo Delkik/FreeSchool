@@ -1,5 +1,35 @@
+.container {
+  margin: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.search {
+  display: flex;
+  gap: 12px;
+}
+
+.searchBar {
+  width: 400px;
+  background-color: white;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+  margin-left: 5%;
+}
+
+.sad {
+  align-self: center;
+  margin-top: 200px;
+  font-size: large;
+  font-style: italic;
 }

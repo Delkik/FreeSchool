@@ -56,8 +56,13 @@ export default function EnrollModal({
   const children = session?.user?.children;
 
   return (
-    <BaseModal title={title} handleClose={handleClose} open={open}>
-      <ul>
+    <BaseModal
+      title={title}
+      handleClose={handleClose}
+      open={open}
+      className={styles.container}
+    >
+      <ul className={styles.data}>
         {children?.map((child) => (
           <li key={child.id} className={styles.borrow_row}>
             <div>

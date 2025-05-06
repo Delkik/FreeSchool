@@ -47,10 +47,11 @@ export default function SearchPage() {
   }, []);
 
   return (
-    <Box>
-      <div>
+    <Box className={styles.container}>
+      <h1 className={styles.title}>Search</h1>
+      <div className={styles.search}>
         <TextField
-          className=""
+          className={styles.searchBar}
           label="Search"
           value={searchValue}
           onChange={handleOnChange}
@@ -66,7 +67,7 @@ export default function SearchPage() {
       </div>
 
       {!data.length ? (
-        <span>
+        <span className={styles.sad}>
           Couldn&apos;t find the classes you&apos;re looking for. Try again with
           another search!
         </span>

@@ -22,7 +22,7 @@ export default function Dashboard() {
     switch (session?.user?.role) {
       case "parent":
         courseGrid = session.user.children ? (
-          <ul>
+          <ul className={styles.childGrid}>
             {session.user.children.map((child) => (
               <li key={child.id}>
                 <ChildCourse userId={session.user!.id} child={child} />

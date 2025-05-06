@@ -1,5 +1,5 @@
 import { Assignment } from "@/schemas/Assignment";
-import styles from "@/modules/components/dashboard/courses/CourseTab.module.css";
+import styles from "@/modules/components/dashboard/courses/AssignmentsTab.module.css";
 import Link from "next/link";
 
 interface AssignmentsTabProps {
@@ -38,7 +38,7 @@ export default function AssignmentsTab({
 
   return (
     <div>
-      <div className={styles.container}>
+      <div className={styles.assignmentContainer}>
         <h2 className={styles.sectionTitle}>Assignments</h2>
         <ul>
           {dueAssignments.map((assignment, index) => (
@@ -59,7 +59,7 @@ export default function AssignmentsTab({
         </ul>
       </div>
 
-      <div className={styles.container}>
+      <div className={styles.assignmentContainer}>
         <h2 className={styles.sectionTitle}>Past Assignments</h2>
         <ul>
           {pastAssignments.map((assignment, index) => (

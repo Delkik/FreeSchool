@@ -9,7 +9,7 @@ export default function EnrollChildButton() {
 
   return (
     <>
-      <Button variant="contained" onClick={handleOpen}>
+      <Button variant="contained" size="large" onClick={handleOpen}>
         Enroll Child
       </Button>
       <EnrollChildModal open={open} handleClose={handleClose} />

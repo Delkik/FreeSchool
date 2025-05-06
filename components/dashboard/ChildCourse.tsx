@@ -11,7 +11,7 @@ interface ChildCourseProps {
 }
 
 export default function ChildCourse({ userId, child }: ChildCourseProps) {
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
   return (
     <div>
       <div className={styles.child_header}>

@@ -3,11 +3,13 @@ import Modal from "@mui/material/Modal";
 import React from "react";
 
 import styles from "@/modules/components/common/BaseModal.module.css";
+import clsx from "clsx";
 
 interface BaseModalProps extends React.PropsWithChildren {
   open: boolean;
   handleClose: () => void;
   title: string;
+  className?: string;
 }
 
 export default function BaseModal({
@@ -15,6 +17,7 @@ export default function BaseModal({
   handleClose,
   children,
   title,
+  className,
 }: BaseModalProps) {
   return (
     <Modal
@@ -24,7 +27,7 @@ export default function BaseModal({
       aria-describedby="modal-modal-description"
     >
       <Box className={styles.modalContainer}>
-        <div className={styles.modalContent}>
+        <div className={clsx(styles.modalContent, className)}>
           <h1 className={styles.title}>{title}</h1>
           {children}
         </div>

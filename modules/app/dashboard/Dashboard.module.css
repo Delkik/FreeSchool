@@ -18,11 +18,19 @@
   padding-left: 24px;
 }
 
+.childGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .full_page {
   display: flex;
   flex-direction: row;
   width: 100%;
   padding-left: 24px;
+  overflow-y: auto;
+  padding-bottom: 24px;
 }
 
 .side_section {

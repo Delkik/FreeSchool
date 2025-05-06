@@ -22,11 +22,21 @@ export default function CoursePreview({ course }: CoursePreviewProps) {
       <Box className={styles.image_preview}>
         <Image src="/static/test-avatar.jpg" fill alt="course preview" />
       </Box>
-      <div>{course.courseName}</div>
-      <div>{course.description}</div>
-      <div>{course.subject}</div>
-      <div>Grade {course.grade}</div>
-      <div>{course.rating} rating</div>
+      <div className={styles.data}>
+        <div className={styles.courseName}>{course.courseName}</div>
+        <div className={styles.description}>
+          {course.description!.length < 100
+            ? course.description
+            : course.description?.slice(0, 100) + "..."}
+        </div>
+        <div className={styles.subject}>{course.subject}</div>
+        <div className={styles.grade}>Grade {course.grade}</div>
+        <div className={styles.rating}>
+          <span className={styles.ratingNumber}>{course.rating}</span>
+          <span className={styles.starBack} />
+          <span className={styles.star} />
+        </div>
+      </div>
     </Box>
   );
 }
