@@ -23,11 +23,17 @@ export default function Dashboard() {
       case "parent":
         courseGrid = session.user.children ? (
           <ul className={styles.childGrid}>
-            {session.user.children.map((child) => (
-              <li key={child.id}>
-                <ChildCourse userId={session.user!.id} child={child} />
-              </li>
-            ))}
+            {session.user.children
+              .sort((a, b) =>
+                b.firstName
+                  .toLowerCase()
+                  .localeCompare(a.firstName.toLowerCase())
+              )
+              .map((child) => (
+                <li key={child.id}>
+                  <ChildCourse userId={session.user!.id} child={child} />
+                </li>
+              ))}
           </ul>
         ) : (
           <p>

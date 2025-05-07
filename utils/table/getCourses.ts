@@ -13,7 +13,10 @@ export default async function getCourses(userId: string, preview: boolean) {
       const previewData: Partial<Course>[] = data.map((course) => {
         return {
           courseName: course.courseName,
-          description: course.description,
+          description:
+            course.description.length > 60
+              ? course.description.slice(0, 60) + "..."
+              : course.description,
         };
       });
       return previewData;

@@ -57,7 +57,11 @@ export default function PreviewTable({ title }: PreviewTableProps) {
             >
               <div className={styles.rowData}>
                 {Object.keys(row).map((rowKey, index) => {
-                  return <span key={`not-row-${index}`}>{row[rowKey]}</span>;
+                  return (
+                    <span key={`not-row-${index}`} className={styles.column}>
+                      {row[rowKey]}
+                    </span>
+                  );
                 })}
               </div>
             </li>

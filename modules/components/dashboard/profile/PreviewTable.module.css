@@ -40,4 +40,10 @@
   justify-content: space-between;
   padding-left: 16px;
   padding-right: 16px;
+  position: relative;
+  align-items: center;
+}
+
+.column {
+  max-width: 50%;
 }
