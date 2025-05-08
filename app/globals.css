@@ -9,6 +9,10 @@
   --link-text: #131ddf;
   --subtext: #6d6d6d;
   --error-text: rgb(246, 51, 51);
+  --doe-dark-blue: #003366;
+  --doe-green: #80b34d;
+  --doe-light-blue: #6699cc;
+  --doe-orange: #ff9933;
 }
 
 /* TODO: add a dark mode (low low low priority) */

@@ -1,3 +1,3 @@
 export default function MessagingPage() {
-  return <div>Messaging</div>;
+  return <div>Come back in a future release!</div>;
 }

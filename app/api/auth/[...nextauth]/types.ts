@@ -1,4 +1,4 @@
-import { BaseUser } from "@/app/schemas/User";
+import { BaseUser } from "@/schemas/User";
 
 declare module "next-auth" {
   interface Session {

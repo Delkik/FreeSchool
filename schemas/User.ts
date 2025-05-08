@@ -8,5 +8,8 @@ export interface BaseUser {
   role: Role;
   grade?: string;
   pfp?: string;
-  isFirstTime: boolean;
+  isFirstTime?: boolean;
+  parentId?: string;
+  children?: BaseUser[];
+  rating?: number;
 }

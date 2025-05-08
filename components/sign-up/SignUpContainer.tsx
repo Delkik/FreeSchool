@@ -62,7 +62,6 @@ export default function SignUpContainer() {
       });
 
       const json = await response.json();
-      console.log(json);
 
       if (json.Session) {
         router.push(`/sign-up/confirm?email=${email}`);
