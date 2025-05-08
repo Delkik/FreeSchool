@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "@/modules/components/main/Navbar.module.css";
 import { House } from "lucide-react";
 import Link from "next/link";
@@ -6,7 +8,7 @@ import { ArrowLeftFromLine } from "lucide-react";
 import { JSX, useState } from "react";
 import { Search } from "lucide-react";
 import { MessageCircle } from "lucide-react";
-import CustomAvatar from "../common/CustomAvatar";
+import CustomAvatar from "@/components/common/CustomAvatar";
 import clsx from "clsx";
 
 const ICON_SIZE = 54;

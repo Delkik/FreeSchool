@@ -1,0 +1,28 @@
+.assignmentContainer {
+  background-color: var(--doe-orange);
+  border-radius: 5px;
+  border: solid 1px black;
+  border-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: x-large;
+  border-bottom: solid 1px black;
+  margin: 10px;
+}
+
+.assignmentRow {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  text-wrap: none;
+  border-bottom: 1px solid rgb(26, 26, 26);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.bottomSection {
+  color: rgb(52, 52, 52);
+  display: flex;
+  gap: 5px;
+}

@@ -1,0 +1,14 @@
+.container {
+  max-height: 500px;
+}
+
+.data {
+  overflow-y: auto;
+}
+
+.borrow_row {
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

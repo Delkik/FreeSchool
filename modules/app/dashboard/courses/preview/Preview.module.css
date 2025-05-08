@@ -14,6 +14,14 @@
   padding-bottom: 0;
 }
 
+.class_actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 180px;
+}
+
 .top_space {
   margin: 50px;
   height: 200px;
@@ -35,6 +43,21 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* optional styling */
 }
 
+.quick_info {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 100%;
+}
+
+.bar_info {
+  border-right: solid 1px black;
+  height: 100%;
+}
+.last {
+  border-right: none;
+}
+
 .class_title {
   font-size: 4rem;
   font-weight: bold;
@@ -49,7 +72,6 @@
 .enroll_buttons_container {
   display: flex;
   gap: 20px;
-  margin-top: 100px;
 }
 
 .enroll_button {

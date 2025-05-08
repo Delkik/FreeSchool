@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+}
+
+.child_header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.child_header_text {
+  font-weight: bold;
+  font-size: 1.7rem;
+}
