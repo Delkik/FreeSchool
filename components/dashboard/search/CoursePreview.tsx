@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import styles from "@/modules/components/dashboard/search/CoursePreview.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+<<<<<<< HEAD
 import { Course } from "@/schemas/Course";
 
 interface CoursePreviewProps {
@@ -15,6 +16,14 @@ export default function CoursePreview({ course }: CoursePreviewProps) {
 
   const onPreviewClick = () => {
     router.push(`/dashboard/courses/${course.id}/preview`);
+=======
+
+export default function CoursePreview() {
+  const router = useRouter();
+
+  const onPreviewClick = () => {
+    router.push(`/dashboard/courses/${"123"}/preview`);
+>>>>>>> eff8406d7012c66f732c9b0d0bd4606e7e0337a4
   };
 
   return (
@@ -22,6 +31,7 @@ export default function CoursePreview({ course }: CoursePreviewProps) {
       <Box className={styles.image_preview}>
         <Image src="/static/test-avatar.jpg" fill alt="course preview" />
       </Box>
+<<<<<<< HEAD
       <div className={styles.data}>
         <div className={styles.courseName}>{course.courseName}</div>
         <div className={styles.description}>
@@ -37,6 +47,9 @@ export default function CoursePreview({ course }: CoursePreviewProps) {
           <span className={styles.star} />
         </div>
       </div>
+=======
+      <span>Arithmetic 1</span>
+>>>>>>> eff8406d7012c66f732c9b0d0bd4606e7e0337a4
     </Box>
   );
 }
