@@ -10,6 +10,11 @@ const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        console.log(
+          process.env.NEXT_PUBLIC_API_URL,
+          process.env.NEXTAUTH_SECRET,
+          process.env.NEXTAUTH_URL
+        );
         try {
           const res = await fetch(
             `${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`,
@@ -60,6 +65,11 @@ const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user, trigger, session }) {
+      console.log(
+        process.env.NEXT_PUBLIC_API_URL,
+        process.env.NEXTAUTH_SECRET,
+        process.env.NEXTAUTH_URL
+      );
       if (trigger === "update" && session?.user) {
         // Note, that `session` can be any arbitrary object, remember to validate it!
         token.user = session.user;
@@ -77,6 +87,11 @@ const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      console.log(
+        process.env.NEXT_PUBLIC_API_URL,
+        process.env.NEXTAUTH_SECRET,
+        process.env.NEXTAUTH_URL
+      );
       if (token) {
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
