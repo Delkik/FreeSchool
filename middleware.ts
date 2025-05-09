@@ -3,7 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 // This is where we handle protected routes and authentication check
 export function middleware(req: NextRequest) {
   // Check for the session using cookies or headers
-  const session = req.cookies.get("next-auth.session-token.0");
+  const session =
+    req.cookies.get("next-auth.session-token.0") ||
+    req.cookies.get("__Secure-next-auth.session-token.0");
 
   // If there is no session, redirect to the login page
   if (!session) {
