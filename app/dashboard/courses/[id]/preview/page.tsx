@@ -10,6 +10,7 @@ import axios from "axios";
 import clsx from "clsx";
 import EnrollModal from "@/components/dashboard/courses/preview/EnrollModal";
 import { useSession } from "next-auth/react";
+import React from "react";
 
 export default function PreviewPage() {
   const { data: session } = useSession();
@@ -35,6 +36,8 @@ export default function PreviewPage() {
     fetchInitialCourseData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(courseData?.extraInfo);
 
   return (
     <Box>
@@ -85,8 +88,17 @@ export default function PreviewPage() {
         <Box className={styles.quick_info_container}>
           <Box className={styles.quick_info}>
             <span className={styles.bar_info}>
-              {courseData?.rating || 5} stars
+              <div className={styles.rating}>
+                <span className={styles.ratingNumber}>
+                  {courseData?.rating || 5}
+                </span>
+                <div className="relative">
+                  <span className={styles.starBack} />
+                  <span className={styles.star} />
+                </div>
+              </div>
             </span>
+
             <span className={styles.bar_info}>
               {courseData?.maxCount} seats available
             </span>
@@ -99,7 +111,14 @@ export default function PreviewPage() {
           </Box>
         </Box>
       </Box>
-      <div>{courseData?.extraInfo || "hi"}</div>
+      <div className={styles.bottom_container}>
+        {courseData?.extraInfo?.split("\n").map((line, idx) => (
+          <React.Fragment key={idx}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+      </div>
     </Box>
   );
 }

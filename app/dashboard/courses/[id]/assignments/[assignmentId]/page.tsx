@@ -9,6 +9,9 @@ import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import styles from "@/modules/app/dashboard/courses/assignments/Assignments.module.css";
+import Box from "@mui/material/Box";
+
 export default function AssignmentPage() {
   const { data: session } = useSession();
   const pathname = usePathname();
@@ -91,10 +94,11 @@ export default function AssignmentPage() {
   }, [session?.user?.id]);
 
   return (
-    <div>
-      <div>
-        <h1>{assignment?.name}</h1>
-        <div>
+    <Box className={styles.container}>
+      <h1 className={styles.heading}>Assignment</h1>
+      <div className={styles.evanescence}>
+        <h2 className={styles.assignment_heading}>{assignment?.name}</h2>
+        <div className={styles.details}>
           <span>{submission ? "Submitted" : "Not Submitted"}</span>
           <span>
             {grade ? grade.numberGrade : "?"}/{assignment?.maxGrade}
@@ -102,35 +106,38 @@ export default function AssignmentPage() {
           <span>Due: {assignment?.due}</span>
           {grade && <span>Graded: {grade?.gradeDate}</span>}
         </div>
-        <div>{assignment?.description}</div>
-        {submission && (
-          <div>
-            <span>{submission.submission}</span>
-          </div>
-        )}
-        {!submission && (
-          <div>
-            <TextField
-              id="outlined-textarea"
-              placeholder="Enter your answer here..."
-              variant="outlined"
-              value={textSubmission || submission}
-              disabled={!!submission || !!childId}
-              minRows={8}
-              maxRows={12}
-              onChange={(e) => setTextSubmission(e.target.value)}
-              multiline
-            />
-            <Button
-              variant="contained"
-              disabled={!textSubmission || !!childId}
-              onClick={handleSubmission}
-            >
-              Submit
-            </Button>
-          </div>
-        )}
+
+        <div className={styles.submission_stuffs}>
+          <div>{assignment?.description}</div>
+          {submission && (
+            <div>
+              <span>{submission.submission}</span>
+            </div>
+          )}
+          {!submission && (
+            <div className={styles.submission_container}>
+              <TextField
+                id="outlined-textarea"
+                placeholder="Enter your answer here..."
+                variant="outlined"
+                value={textSubmission || submission}
+                disabled={!!submission || !!childId}
+                minRows={8}
+                maxRows={12}
+                onChange={(e) => setTextSubmission(e.target.value)}
+                multiline
+              />
+              <Button
+                variant="contained"
+                disabled={!textSubmission || !!childId}
+                onClick={handleSubmission}
+              >
+                Submit
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </Box>
   );
 }
